@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>Title</title>
+</head>
+<body>
+   <h2>преобразования числа в его текстовое представление</h2>
+</body>
+<script>
+   function num_to_text(number) {
+      var text_1 = [
+         'один',
+         'два',
+         'три',
+         'четыре',
+         'пять',
+         'шесть',
+         'семь',
+         'восемь',
+         'девять',
+      ];
+
+      var text_2 = [
+         'десять',
+         'двадцать',
+         'тридцать',
+         'сорок',
+         'пятдесят',
+         'шестдесят',
+         'семдесят',
+         'восемдесят',
+         'девяносто',
+      ];
+
+      num_1 = Math.trunc(number / 10);
+      num_2 = number % 10;
+
+      // console.log (num_1 + ' ' + num_2);
+      console.log (text_2[num_1-1] + ' ' + text_1[num_2-1]);
+   }
+
+   num_to_text(99);
+
+</script>
+</html>

@@ -1,0 +1,53 @@
+create category - INSERT INTO `test-zp`.`category` (`parent_id`, `name`, `created_at`) VALUES (1, ' омпьютеры', '2020-07-30 09:48:35');
+
+
+
+3. Ќаписать SQL-запросы дл€ получени€ следующих данных:
+a. ƒл€ заданного списка товаров получить названи€ всех категорий, в которых
+представлены товары
+
+SELECT c.name
+	FROM category as c
+		LEFT JOIN product as p ON p.category_id=c.id
+		WHERE p.id IN (1,3);
+
+
+3. Ќаписать SQL-запросы дл€ получени€ следующих данных:
+b. ƒл€ заданной категории получить список предложений всех товаров из этой категории и
+ее дочерних категорий
+
+SELECT p.name
+	FROM product as p
+		LEFT JOIN category_path as cp ON cp.cat_id=p.category_id
+	WHERE cp.path_id=1;
+
+
+3. Ќаписать SQL-запросы дл€ получени€ следующих данных:
+c. ƒл€ заданного списка категорий получить количество предложений товаров в каждой
+категории
+
+SELECT p.id, p.name
+	FROM product as p
+		LEFT JOIN category_path as cp ON cp.cat_id=p.category_id
+	WHERE cp.path_id IN (1,4,5,6)
+	GROUP BY p.id;
+
+3. Ќаписать SQL-запросы дл€ получени€ следующих данных:
+d. ƒл€ заданного списка категорий получить общее количество уникальных предложений
+товара;
+
+SELECT category_id, c.name, COUNT(product_id) AS total
+	FROM product_to_category as pc
+		LEFT JOIN category as c ON pc.category_id=c.id
+	WHERE category_id IN (1,2,3,4,5,6)
+	GROUP BY category_id
+
+
+3. Ќаписать SQL-запросы дл€ получени€ следующих данных:
+e. ƒл€ заданной категории получить ее полный путь в дереве (breadcrumb, Ђхлебные
+крошкиї).
+SELECT c.name
+	FROM category_path as cp
+		LEFT JOIN category as c ON c.id=cp.path_id
+	WHERE cat_id=4
+	ORDER BY level ASC;
